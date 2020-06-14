@@ -32,14 +32,15 @@ public class FoodTruckLocatorController {
     @GetMapping("/locate")
     public ResponseEntity<List<FoodTruckDTO>> locateNearbyFoodTrucks(@RequestParam(value = "latitude", defaultValue = "37.7921198") double latitude,
                                                                      @RequestParam(value = "longitude", defaultValue = "-122.4060529") double longitude,
-                                                                     @RequestParam(value = "radius", defaultValue = "2.0") double radius){
+                                                                     @RequestParam(value = "radius", defaultValue = "2.0") double radius,
+                                                                     @RequestParam(value = "limit", defaultValue = "5") int limit){
 
         ResponseEntity<List<FoodTruckDTO>> foodTrucksResponse = null;
         FoodTruckSearchRequest foodTruckSearchRequest = new FoodTruckSearchRequest();
         foodTruckSearchRequest.setLatitude(latitude);
         foodTruckSearchRequest.setLongitude(longitude);
         foodTruckSearchRequest.setRadius(radius);
-
+        foodTruckSearchRequest.setLimit(limit);
         try{
             logger.info("Calling the FoodTruckLocatorService");
             foodTrucksResponse = foodTruckLocatorService.locateNearbyFoodTrucks(foodTruckSearchRequest);
