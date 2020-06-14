@@ -18,6 +18,7 @@ import java.util.List;
 * FoodTruckLocatorController has only one GET method that takes the user's coordinates
 * and radius as parameters and returns a list of Food Trucks within that radius.
 * */
+
 @RestController
 @RequestMapping("/foodtruck")
 public class FoodTruckLocatorController {
