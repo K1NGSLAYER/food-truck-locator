@@ -2,9 +2,10 @@ package com.kingfard.foodtrucklocator.helper.impl;
 
 import com.kingfard.foodtrucklocator.DTO.FoodTruckDTO;
 import com.kingfard.foodtrucklocator.helper.FoodTruckHelper;
+import org.springframework.stereotype.Component;
 
 import java.util.Map;
-
+@Component
 public class FoodTruckHelperImpl implements FoodTruckHelper {
     @Override
     public FoodTruckDTO populateTruckObject(Map<String, Object> truckMap, double userLatitude, double userLongitude) {

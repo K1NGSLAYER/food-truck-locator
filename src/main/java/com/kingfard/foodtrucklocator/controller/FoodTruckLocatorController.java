@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+/*
+* FoodTruckLocatorController has only one GET method that takes the user's coordinates
+* and radius as parameters and returns a list of Food Trucks within that radius.
+* */
 @RestController
 @RequestMapping("/foodtruck")
 public class FoodTruckLocatorController {
@@ -29,6 +32,7 @@ public class FoodTruckLocatorController {
     public ResponseEntity<List<FoodTruckDTO>> locateNearbyFoodTrucks(@RequestParam(value = "latitude", defaultValue = "37.7806943774082") double latitude,
                                                                      @RequestParam(value = "longitude", defaultValue = "-122.409668813219") double longitude,
                                                                      @RequestParam(value = "radius", defaultValue = "3.0") double radius){
+
         ResponseEntity<List<FoodTruckDTO>> foodTrucksResponse = null;
         FoodTruckSearchRequest foodTruckSearchRequest = new FoodTruckSearchRequest();
         foodTruckSearchRequest.setLatitude(latitude);
@@ -36,10 +40,14 @@ public class FoodTruckLocatorController {
         foodTruckSearchRequest.setRadius(radius);
 
         try{
+            logger.info("Calling the FoodTruckLocatorService");
             foodTrucksResponse = foodTruckLocatorService.locateNearbyFoodTrucks(foodTruckSearchRequest);
+            logger.info("FoodTruckLocatorService call SUCCESSFUL");
+
         }catch (Exception e){
             logger.error(e.getMessage());
             foodTrucksResponse = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            logger.info("Call to FoodTruckLocatorService FAILED");
         }
         return foodTrucksResponse;
     }
