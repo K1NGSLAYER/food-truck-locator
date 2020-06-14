@@ -67,7 +67,7 @@ public class FoodTruckLocatorServiceImpl implements FoodTruckLocatorService {
                 }
             }
             foodTrucks.sort(Comparator.comparing(FoodTruckDTO::getDistance));
-
+            foodTrucks = foodTrucks.subList(0,foodTruckSearchRequest.getLimit());
             foodTrucksResponse = new ResponseEntity<>(foodTrucks, HttpStatus.OK);
         } catch (JSONException e) {
            logger.error(e.getMessage());
