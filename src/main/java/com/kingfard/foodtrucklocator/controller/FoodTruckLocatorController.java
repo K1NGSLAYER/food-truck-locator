@@ -29,9 +29,9 @@ public class FoodTruckLocatorController {
        this.foodTruckLocatorService = foodTruckLocatorService;
     }
     @GetMapping("/locate")
-    public ResponseEntity<List<FoodTruckDTO>> locateNearbyFoodTrucks(@RequestParam(value = "latitude", defaultValue = "37.7806943774082") double latitude,
-                                                                     @RequestParam(value = "longitude", defaultValue = "-122.409668813219") double longitude,
-                                                                     @RequestParam(value = "radius", defaultValue = "3.0") double radius){
+    public ResponseEntity<List<FoodTruckDTO>> locateNearbyFoodTrucks(@RequestParam(value = "latitude", defaultValue = "37.7921198") double latitude,
+                                                                     @RequestParam(value = "longitude", defaultValue = "-122.4060529") double longitude,
+                                                                     @RequestParam(value = "radius", defaultValue = "2.0") double radius){
 
         ResponseEntity<List<FoodTruckDTO>> foodTrucksResponse = null;
         FoodTruckSearchRequest foodTruckSearchRequest = new FoodTruckSearchRequest();
