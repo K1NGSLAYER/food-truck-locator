@@ -3,7 +3,6 @@ package com.kingfard.foodtrucklocator.service.Impl;
 import com.kingfard.foodtrucklocator.DTO.FoodTruckDTO;
 import com.kingfard.foodtrucklocator.DTO.FoodTruckSearchRequest;
 import com.kingfard.foodtrucklocator.helper.FoodTruckHelper;
-import com.kingfard.foodtrucklocator.helper.impl.FoodTruckHelperImpl;
 import com.kingfard.foodtrucklocator.service.FoodTruckLocatorService;
 
 import org.json.JSONArray;
@@ -67,8 +66,12 @@ public class FoodTruckLocatorServiceImpl implements FoodTruckLocatorService {
                 }
             }
             foodTrucks.sort(Comparator.comparing(FoodTruckDTO::getDistance));
-            foodTrucks = foodTrucks.subList(0,foodTruckSearchRequest.getLimit());
-            foodTrucksResponse = new ResponseEntity<>(foodTrucks, HttpStatus.OK);
+
+            //Checks if requested limit is greater than the size of list of foodTrucks
+            if (foodTruckSearchRequest.getLimit() < foodTrucks.size()){
+                foodTrucks = foodTrucks.subList(0,foodTruckSearchRequest.getLimit());
+            }
+                foodTrucksResponse = new ResponseEntity<>(foodTrucks, HttpStatus.OK);
         } catch (JSONException e) {
            logger.error(e.getMessage());
             foodTrucksResponse = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
